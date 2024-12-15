@@ -86,7 +86,7 @@ Verb 'no'
 		prologuequestion = 1;
 		SetTime(1* 60 + 5, 5); ! Amazing, TRULY amazing, how the entire concept of time itself could be brought to life with just one simple equation of four digits, while
 							   ! 'Let there be light' is only four words.
-		move player to StaveOne;
+		move player to HotelEntrance;
 	} else {
 		"I'm glad you agree, O reader, though I'm not sure what you just agreed to.";
 	}
@@ -149,9 +149,10 @@ Object Prologue "^PROLOGUE : Christmas Adam"
 			to present these events to you in such a manner that you understand what is truly at stake: not the fate of our Eleanor, nor the fate of myself, but the fate of the world:
 			all 5,234,431,732 blinking, shouting, crying, defecating, bleeding hearts that beat together in asynchronous harmony, and yes, even you, my friend. ^^Do you understand?";
 
-Object StaveOne "STAVE ONE : Ashley's Ghost"
+Object HotelEntrance "Palmer House Entrance"
 	with
-		description "Test text.";
+		initial "^^STAVE ONE : ASHLEY'S GHOST" "^^I can't believe that this works!",
+		description "If someone were to put test text here, that someone would be me.";
 
 Object -> Box "box"
 	with
