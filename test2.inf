@@ -1,0 +1,207 @@
+!% -~S
+!% $OMIT_UNUSED_ROUTINES=1
+!% $ZCODE_LESS_DICT_DATA=1
+
+Constant Story          "Uncle Billy's Will";
+Constant Headline       "^An interactive paper hunt.^";
+
+Constant STATUSLINE_SCORE; Statusline score;
+
+Constant DEBUG;
+Constant OPTIONAL_SIMPLE_DOORS;
+Constant OPTIONAL_NO_DARKNESS;
+Constant INITIAL_LOCATION_VALUE = Lawn;
+
+Constant OPTIONAL_SCORED;
+Constant OPTIONAL_FULL_SCORE;
+Constant MAX_SCORE 200;
+Constant OBJECT_SCORE 20;
+Constant ROOM_SCORE 15;
+
+Include "globals.h";
+Include "puny.h";
+
+Verb 'knock'
+    * 'on'/'at'/'in' noun -> KnockOn;
+
+Extend 'look'
+    * 'under' noun -> LookUnder;
+
+[KnockOnSub;
+    "Knock knock!";
+];
+
+[LookUnderSub;
+    "There's probably not much to see there.";
+];
+
+Object Lawn "Lawn"
+    with
+        description "You are on the lawn. A path leads north to the house.",
+        n_to FrontPorch,
+        s_to "But you just got here!";
+
+Object FrontPorch "Front Porch"
+    with
+        description "It's a lavish porch, certainly larger than your entire flat.",
+        n_to FrontDoor,
+        s_to Lawn;
+
+Object -> DoorMat "door mat"
+    with
+        parse_name [ w1 w2;
+            w1 = NextWord();
+            w2 = NextWord();
+            if(w1 == 'door' && w2 == 'mat') return 2;
+            if(w1 == 'doormat' or 'mat') return 1;
+        ],
+        before [;
+            Take, Remove:
+                "That would be incredibly rude.";
+            LookUnder, Pull:
+                if(parent(MetalKey) == 0) {
+                    move MetalKey to location;
+                    score = score + 10;
+                    "You discover a key!";
+                }
+        ],
+    has supporter enterable;
+
+Object MetalKey "key"
+    with
+        name 'metal' 'key',
+        description "It's a shiny metal key.",
+    has scored;
+
+Object FrontDoor "front door"
+    with
+        name 'front' 'door',
+        description "Looks like a very sturdy oak door. Fine craftmanship.",
+        when_open [;
+            if(location == FrontPorch)
+                "The front door is open, beckoning you inside.";
+            else
+                "The front door is open, showing you a glimpse of the porch and lawn outside.";
+        ],
+        when_closed "The sturdy front door is closed.",
+        before [;
+            KnockOn:
+                "You knock and wait in silence. There is no reply.";
+        ],
+        found_in FrontPorch Entrance,
+        door_dir (n_to) (s_to),
+        with_key MetalKey,
+    has static door openable lockable locked;
+
+Object Entrance "Entrance"
+    with
+        description "This area feels warm and welcoming, with its wooden panels
+        and many potted plants. A small sign next to the doorway to the east
+        tells you there's an office in that direction. Below the sign
+        are two boxes on the wall, one blue and one green.",
+        s_to FrontDoor,
+        e_to OfficeDoor,
+      has scored;
+
+Object -> GlassBox "huge glass box"
+    with
+        name 'huge' 'glass' 'box' 'boxes//p',
+        inside_description "The box seems surprisingly roomy now that you're in
+        it. Of course the glass sides help - you'd feel a lot more
+        constrained if the sides weren't transparent.",
+        before [;
+            Take, Remove, Turn, Push, Pull:
+                "It weights a ton at least!";
+        ],
+    has static container openable enterable transparent;
+
+Object -> -> Necklace "necklace"
+    with
+        name 'necklace' 'string',
+        description "It consists of a piece of string with an emerald, a ruby and a sapphire on it.",
+        before [ loc;
+            Attack:
+                if (ObjectIsUntouchable(noun))
+                    rtrue;
+                loc = parent(self);
+                remove self;
+                move Emerald to loc;
+                move Ruby to loc;
+                move Sapphire to loc;
+                score = score + 20;
+                "You break the necklace, leaving you with three gems.";
+        ],
+    has transparent;
+
+Object -> -> -> Emerald "emerald"
+    with
+        name 'emerald' 'gem' 'gems//p',
+        article "an";
+
+Object -> -> -> Ruby "ruby"
+    with
+        name 'ruby' 'gem' 'gems//p';
+
+Object -> -> -> Sapphire "sapphire"
+    with
+        name 'sapphire' 'gem' 'gemms/pp';
+
+Object -> BlueBox "blue box"
+    with
+        name 'blue' 'box' 'boxes//p',
+        description "It's a small metal box, firmly attached to the wall next to
+        the office door.",
+        describe [; rtrue; ],
+    has static container open;
+
+Object -> GreenBox "green box"
+    with
+        name 'green' 'box' 'boxes//p',
+        description "It's a small metal box, firmly attached to the wall next to
+        the office door.",
+        describe [; rtrue; ],
+    has static container open;
+
+Object OfficeDoor "office door"
+    with
+        name 'office' 'door',
+        react_after [;
+            Insert, Take, Remove:
+                if(Sapphire in BlueBox && children(BlueBox) == 1 &&
+                    Emerald in GreenBox && children(GreenBox) == 1 &&
+                    self has locked) {
+                        give self ~locked;
+                        score = score + 70;
+                        "A loud click is heard from the office door.";
+                    }
+        ],
+        describe [; rtrue; ],
+        found_in Entrance Office,
+        door_dir (e_to) (w_to),
+    has static door openable lockable locked;
+
+Object Office "Office"
+    with
+        name 'desk' 'chair',
+        description "It's a neat and tidy little office. There's a desk and a 
+        chair near the window.",
+        w_to OfficeDoor,
+    has scored;
+
+Object -> Will "Will"
+    with   
+        name 'will' 'piece' 'of' 'paper',
+        initial "There's a piece of paper on the desk.",
+        description [;
+            deadflag = GS_WIN;
+            score = score + 50;
+            "It's uncle Billy's Will, and it says he leaves everything to you! You are now rich!";
+        ];
+
+[Initialise;
+    print "^^Ever since your dear uncle Billy got sick, his spoilt kids have been fighting over the inheritance.
+    Billy told you in confidence that he's been working on a will to fix that problem, but you don't know
+    if he's managed to finish it before he passed away last month. You've worked hard to find it, but this far you've failed.
+    This morning you got news from Billy's lawyer that Billy owned another house that noone knew about. You realize you're clutching at straws here, but you have
+    to check it out. The cab pulls away and you're on your own.^^";
+];

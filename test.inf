@@ -1,0 +1,84 @@
+!% -~S
+!% $OMIT_UNUSED_ROUTINES=1
+!% $ZCODE_LESS_DICT_DATA=1
+
+Constant Story  "The Mansion at the Edge of Town";
+Constant Headline   "^An interactive nightmare.^";
+
+Constant DEBUG;
+Constant OPTIONAL_FULL_DIRECTIONS;
+Constant OPTIONAL_EXTENDED_VERBSET;
+Constant OPTIONAL_EXTENDED_METAVERBS;
+Constant INITIAL_LOCATION_VALUE = Entrance;
+
+Include "globals.h";
+
+Include "puny.h";
+
+Global triedtotakepainting = 0;
+Global thoughtaboutpainting = 0;
+
+Object Entrance "Entrance"
+    with
+        name 'front' 'door' 'cubicle' 'stairs',
+        description "You are in the entrance area of the mansion. A wide set of
+            stairs lead up. There is a small cubicle in the southe ast corner,
+            while the front door is to the south.",
+        u_to UpstairsHallway,
+        se_to Cubicle,
+        in_to Cubicle,
+        s_to "The front door has apparently been nailed shut.",
+        cant_go "There's nothing of interest in that direction.",
+    has light;
+
+Object Cubicle "Cubicle"
+    with
+        initial "You squeeze in through the small opening, hitting your head
+            against the doorway in the process.^",
+        description "It's quite cosy in here. There are some marks on the wall
+        where a desk probably used to stand. The exit is to the north.",
+        out_to Entrance,
+        n_to Entrance,
+    has light;
+
+Object UpstairsHallway "Upstairs Hallway"
+    with
+        description "Nothing much to see here really. There are some doors, but 
+        they have all been nailed shut. The stairs lead down to the west.",
+        d_to Entrance,
+        w_to Entrance,
+    has light;
+
+
+
+Object -> Painting "painting"
+    with
+        name 'painting',
+        initial "Hanging on the west east wall is a dark oil painting.",
+        description "It's a lovely old painting of a crying clown.",
+        before [;
+            Take:
+                if(triedtotakepainting == 0) {
+                print "Are you sure about that, buddy?";
+                triedtotakepainting = 1;
+                thoughtaboutpainting = 1;
+                rtrue; 
+                }
+        ],
+        after [;
+            Examine:
+                give self general;
+        ],
+        short_name [;
+            if(self has general) {
+                print "painting of a clown";
+                rtrue;
+            }
+        ];
+
+[Initialise;
+    print "^^You and your friends went out to the old abandoned mansion on the
+    outskirts of town. Once in the house, you remember getting separated
+    from the group, and then all went black. As you come to, several hours
+    have passed, you seem to be alone, and everything is quiet.^^";
+];

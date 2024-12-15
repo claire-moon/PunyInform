@@ -1,0 +1,167 @@
+!% -~S
+!% $OMIT_UNUSED_ROUTINES=1
+!% $ZCODE_LESS_DICT_DATA=1
+
+! FOR CLAIRE USAGE: "inform6 -v3 +lib holidayhymn"
+! FOR CLAIRE USAGE: "E:\GameDev\PunyInform\"
+
+Constant Story      "A HOLIDAY HYMN";
+Constant Headline   "^IN PROSE^being a Ghost Story of Christmas^^";
+
+
+! Uncomment ONE of the two following lines, to show either time or score/turns
+! Leaving both commented out makes the library bigger.
+Constant STATUSLINE_TIME; Statusline time;
+!Constant STATUSLINE_SCORE; Statusline score;
+
+! Comment out to keep track of score
+! The value is what will be shown as the score on statusline in z3
+Constant NO_SCORE = 0;
+
+! Customize the statusline in z5+ (has no effect in z3)
+!Constant OPTIONAL_SL_NO_SCORE;
+!Constant OPTIONAL_SL_NO_MOVES;
+
+! Uncomment to add optional features to PunyInform
+!Constant DEBUG;
+!Constant DIALECT_US ! Affects OPTIONAL_LANGUAGE_NUMBER
+!Constant CUSTOM_ABBREVIATIONS;
+!Constant CUSTOM_PLAYER_OBJECT = myPlayerObj;
+Constant OPTIONAL_NO_DARKNESS;
+!Constant OPTIONAL_NON_FLASHING_STATUSLINE;
+!Constant OPTIONAL_FULL_DIRECTIONS;
+!Constant OPTIONAL_SHIP_DIRECTIONS;
+!Constant OPTIONAL_ALLOW_WRITTEN_NUMBERS;
+!Constant OPTIONAL_GUESS_MISSING_NOUN;
+!Constant OPTIONAL_EXTENDED_METAVERBS;
+!Constant OPTIONAL_EXTENDED_VERBSET;
+!Constant OPTIONAL_FLEXIBLE_INVENTORY;
+!Constant OPTIONAL_LANGUAGE_NUMBER;
+!Constant OPTIONAL_LIST_TOGETHER;
+!Constant OPTIONAL_PRINT_SCENERY_CONTENTS;
+!Constant OPTIONAL_SCORED;
+!Constant OPTIONAL_FULL_SCORE; ! Comment out NO_SCORE when uncommenting this
+!Constant OPTIONAL_SIMPLE_DOORS;
+!Constant OPTIONAL_MANUAL_SCOPE;
+!Constant OPTIONAL_MANUAL_SCOPE_BOOST;
+!Constant OPTIONAL_MANUAL_REACTIVE;
+!Constant OPTIONAL_ORDERED_TIMERS;
+!Constant OPTIONAL_PROVIDE_UNDO;
+!Constant OPTIONAL_REACTIVE_PARSE_NAME;
+!Constant RUNTIME_ERRORS = 0; ! 0, 1 or 2. 0 = smallest file, 2 = most info
+
+! Define any library constants you need here, like MAX_SCORE, AMUSING_PROVIDED,
+! MAX_CARRIED, SACK_OBJECT,  etc.
+
+Constant INITIAL_LOCATION_VALUE = Prologue;
+
+Include "globals.h";
+
+! Define your attributes, common properties and global variables here, if any
+
+! Define the entry point routines you need here, like Amusing, DarkToDark etc.
+
+! Uncomment to add PunyInform extensions
+!Include "ext_menu.h";
+!Include "ext_flags.h";
+!Include "ext_talk_menu.h"; ! Note: Also include ext_flags.h to allow use of flags
+!Include "ext_quote_box.h";
+!Include "ext_cheap_scenery.h";
+
+Include "puny.h";
+
+! Uncomment to add PunyInform extensions
+!Include "ext_waittime.h";
+
+Global prologuequestion = 0;
+
+Verb 'yes'
+	* -> YesAnswer;
+
+Verb 'no'
+	* -> NoAnswer;
+
+[ YesAnswerSub;
+	if(prologuequestion == 0) {
+		prologuequestion = 1;
+		SetTime(1* 60 + 5, 5); ! Amazing, TRULY amazing, how the entire concept of time itself could be brought to life with just one simple equation of four digits, while
+							   ! 'Let there be light' is only four words.
+		move player to StaveOne;
+	} else {
+		"I'm glad you agree, O reader, though I'm not sure what you just agreed to.";
+	}
+];
+
+[ NoAnswerSub;
+	if(prologuequestion == 0) {
+		prologuequestion = 1;
+		deadflag = GS_DEAD;
+		"Ah, very well. I appreciate your time in this case, O reader. May your holidays be bright, and see you in the next life.";
+	} else {
+		"I'm sorry, O reader, and I hope that I did not offend. If you would like to stop reading, I will not keep you. You may leave at any time.";
+	}
+];
+
+Object Prologue "^PROLOGUE : Christmas Adam"
+	with
+		description "^^Eleanor was * such * a Scrooge. At least, that's what she told herself. ^^Now, why on God's magnificent Earth: that life-breathing marble of emerald green, 
+			suspended by a thin film of web in infinite pirouette, itself twirling endlessly beneath twinkling swathes of star-speckled indigo, a world that we all drink from, taste 
+			from, breathe from, an ever-expanding colony full of little worker ants scurrying to get that big fat crumb; all of them foaming at the mouth, sickened by the curses of 
+			love and longing, HOW then, I ask, would one of His many souls commit such a epithet, one not predicated on the spoken notion on another, but instead born from an 
+			impression, a sumption with a pre-fix, a bold-faced ass-umption, WHY, would a soul give that to * herself *? ^^Perhaps I may have answered my own question, and to 
+			whomever I find myself gabbling onto on this cold and rainy Christmas Adam night, my kind and discerning observer, may you please find my gratitude for your patience 
+			laced around my words to you, for I have been observer of poor Eleanor for sometime now, and through all of my fretfulness and affections for the aging woman I have found 
+			myself not only responsible, but bound-by-fate, to regale you with her tale. ^^It is because of her story, O Reader, that I implore you to see the irony in her words, and 
+			to feel the macabre nature of their roots, when our dear Eleanor spoke those fateful words-to whom: no one could be certain-but spoken none the less. 
+			^^~You're such a scrooge, Eleanor~. ^^It is possible that the man sitting next to her on the plane was simply in a hurry, though the timing of his departure from his 
+			seat to the bathroom were rather suspect to both myself and Eleanor, in addition to the flight attendant then rushing down the aisle after him begging him to return to 
+			his seat pending their imminent arrival at Chicago O'Hare. Nevertheless, we may never know, for coincidences are just that: curious little accidents. But as for our 
+			unwitting Eleanor, who had spent the majority of her life-a wasted life by her own account-dismissing such daydreams as a childish fantasy, could not herself shake that 
+			oh so peculiar alignment of the events surrounding her remark.  ^^Why Eleanor said such words aloud, in order, unbidden, as though these very words had been planted in 
+			her throat? Why had the man, whose presence she was completely oblivious to for the majority of their short time together on this Earth, become so animated as to 
+			immediately rise from his throne, as though prompted by forces unseen? ^^Mind you, O reader! For there were nary a single cue card in sight. Not a script, nor a prelude, 
+			or a hushed whisper of a voice beckoning him from the shadow that stretched beyond their skyward submersible. ^^He had simply * risen *, my friend. Eleanor too, in her 
+			own special little way. She answered yet another call from the void, to the unspoken weight of those words she had thrown out like a forgotten trinket, say, a luminous 
+			diamond ring buried at the bottom of her leather purse, its luster muted beneath the weight of yellowing reciepts and crinkled tissues. Now, in the absence of the man of 
+			dubious intents beside her, she is left only with its echo: ^^~You're such a scrooge, Eleanor~. ^^In that brief moment, a strange sensation washed over her, subtle but 
+			undeniable, one that clung to the ramparts of some crumbling empire, a fading tapestry in tatters hung against a crackled parapet. Not a sensation of embarassment, and 
+			not quite regret either... A fanged spectre of recognition gnawing at the back of her mind, that perhaps, just perhaps, she had been caught: in a manner so extraordinary 
+			to herself. ^^~Scrooge~, that was the name wasn't it? A name synonymous with Christmas itself, dripping with the dew of history. It was there in that moment, O reader, on 
+			that fateful flight from Adams Field to Chicago O'Hare, upon flight 1019, sandwiched between a pitch black window and the empty seat of her toilet-bound brother in 
+			flight, that Eleanor felt the reflection of her words in solitude, by the very * words * themselves. The shadow of those words casting her in silhouette for nearly her 
+			entire life, now slipping so carelessly between her rosy lips, almost involuntarily, like the ghost from some past unknown. ^^~Scrooge~, she had repeated under her 
+			breath, tasting that word again for all its bitter metallics. It was then that she concluded that perhaps the 'joke', wherever that was, was on her. A 42 year old joke 
+			from the cackling phantoms of her parents, cradling that innocent new-born child in their hands for the very first time and christening it Eleanor, a tongue-in-cheek 
+			reference to some doddering old fool who was defined by his sadness. ^^~What a joke!~, you might say, O reader, and yes indeed, what a joke that would be. ^^As their 
+			plane descended into the glittering skyline of Chicago, her buildings suffocating in a murky fog, the true irony of it all began to settle in. How, O reader, could she 
+			have lived this long, she wondered. How exactly could she allow such a destiny to be her cocoon, blind to these so-called truths that now haunted her like the cherry 
+			green haze of the lights of the bustling metro below, illuminated in the reflection of the clouds. How on this Earth could someone align themselves with the very concept 
+			they detest, a glass ballerina embued with her very own judgement. Is it true, I ask you, that this is the very fate she carved for herself, straight from the ice, by her 
+			own trembling hand, through all of those foggy years that grow ever smaller in the rear-view window? ^^Mind your answer, O reader, for that answer, whether you like it or 
+			not, will find you, someday. ^^Perhaps the supposed 'Ghosts of Christmas' had already begun their seasonal stirring, in their quiet little ways, they had planted that 
+			very seed that sprout forth this moment, like a poinsetta blooming with the reds of a forgotten Autumn, right there in her lap. 
+			^^Perhaps. ^^--^^^^^^^^^^^^^^^^^^^^^^^^Much later, after perhaps one of the most unremarkable taxi rides of our lifetime, a tale so uninteresting that even writing a 
+			single word about it would result in immediate exile from not only my closest confidantes and dear family members, but from God himself. Please understand the gravity of 
+			this consequence, O reader, for you will not find a more patient spectator than the one who creates, and to bore Him would be a feat only attainable by that of an 
+			Olympian Fool, the reverberation of that tale undoubtedly whispered in reptition across all of Athens. I appreciate if you save me the embarassment of such an exile,
+			for an old woman like myself is not without her pride, however bruised and damaged it may be. So let us skip these trivialities, O reader, and take my hand: as we skip
+			forward to the cataylst of events so calamitous that I find myself awake in the wee hours of the morning, typing away at my keyboard with a feverish enthusiasm, in order
+			to present these events to you in such a manner that you understand what is truly at stake: not the fate of our Eleanor, nor the fate of myself, but the fate of the world:
+			all 5,234,431,732 blinking, shouting, crying, defecating, bleeding hearts that beat together in asynchronous harmony, and yes, even you, my friend. ^^Do you understand?";
+
+Object StaveOne "STAVE ONE : Ashley's Ghost"
+	with
+		description "Test text.";
+
+Object -> Box "box"
+	with
+		name 'box',
+		inside_description "How the fuck did you get in here?",
+	has container open openable enterable;
+
+[Initialise;
+	print "- PREFACE -^";
+	print "^^I have commited to code this Ghostly little adventure, to echo the Ghost of an Idea, from an old, dear friend.^^";
+	print "^^It is my hope that this Ghost finds you in good spirits, and as it did before me: may it haunt your houses pleasantly.^^";
+	print "^^Your friendly servant, C. G. MOON^^";
+];
