@@ -73,18 +73,18 @@ Include "puny.h";
 ! Uncomment to add PunyInform extensions
 !Include "ext_waittime.h";
 
-Object Prologue "^PROLOGUE : Christmas Adam"
+Object Prologue "^- PROLOGUE : Christmas Adam -"
 	with
 		description
 			"^^Eleanor was * such * a Scrooge. At least, that's what she told herself. ^^Now, why on God's magnificent Earth: that life-breathing marble of emerald green, 
 			suspended by a thin film of web in infinite pirouette, itself twirling endlessly beneath twinkling swathes of star-speckled indigo, a world that we all drink from, taste 
 			from, breathe from, an ever-expanding colony full of little worker ants scurrying to get that big fat crumb; all of them foaming at the mouth, sickened by the curses of 
-			love and longing, HOW then, I ask, would one of His many souls commit such a epithet, one not predicated on the spoken notion on another, but instead born from an 
+			love and longing, HOW then, I ask, would one of His many souls commit such a epithet: one not predicated on the spoken notion on another, but instead born from an 
 			impression, a sumption with a pre-fix, a bold-faced ass-umption, WHY, would a soul give that to * herself *? ^^Perhaps I may have answered my own question, and to 
-			whomever I find myself gabbling onto on this cold and rainy Christmas Adam night, my kind and discerning observer, may you please find my gratitude for your patience 
-			laced around my words to you, for I have been observer of poor Eleanor for sometime now, and through all of my fretfulness and affections for the aging woman I have found 
+			whomever I find myself gabbling onto on this cold and rainy Christmas Adam night: my kind and discerning observer, may you please find my gratitude for your patience 
+			laced around my words to you, for I have been spectator of poor Eleanor for sometime now, and through all of my fretfulness and affections for the aging woman I have found 
 			myself not only responsible, but bound-by-fate, to regale you with her tale. ^^It is because of her story, O Reader, that I implore you to see the irony in her words, and 
-			to feel the macabre nature of their roots, when our dear Eleanor spoke those fateful words-to whom: no one could be certain-but spoken none the less. 
+			to feel the macabre nature of their roots, when our dear Eleanor spoke those fateful words-to whom: no one could be certain-but spoken none the less: 
 			^^~You're such a scrooge, Eleanor~. ^^It is possible that the man sitting next to her on the plane was simply in a hurry, though the timing of his departure from his 
 			seat to the bathroom were rather suspect to both myself and Eleanor, in addition to the flight attendant then rushing down the aisle after him begging him to return to 
 			his seat pending their imminent arrival at Chicago O'Hare. Nevertheless, we may never know, for coincidences are just that: curious little accidents. But as for our 
@@ -122,7 +122,7 @@ Object Prologue "^PROLOGUE : Christmas Adam"
 			all 5,234,431,732 blinking, shouting, crying, defecating, bleeding hearts that beat together in asynchronous harmony, and yes, even you, my friend. ^^It was then, as
 			the pendulum completed it's final arc beneath the clock that midnight struck, as our unwitting but lovable protagonist Eleanor arrived at the entrance of the Palmer House
 			Hilton, rain pouring down on her umbrella in a symphony of hushed murmurs, thousands of tiny voices from the heavens above coalescing into a steady pitter pattern
-			in her eardrums. In other words, O reader, she arrived.",
+			in her eardrums. In other words, O reader, she arrived. ^^---",
 			after [;
             	Look:
                 	PlayerTo(HotelEntrance);
@@ -131,8 +131,8 @@ Object Prologue "^PROLOGUE : Christmas Adam"
 
 Object HotelEntrance "Palmer House Entrance"
 	with
-		initial "^^STAVE ONE : ASHLEY'S GHOST" "^^I can't believe that this works!",
-		description "If someone were to put test text here, that someone would be me.";
+		initial "^^- STAVE ONE : ASHLEY'S GHOST -" "^^I can't believe that this works!",
+		description "^^If someone were to put test text here, that someone would be me.";
 
 Object -> Box "box"
 	with
