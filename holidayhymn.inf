@@ -33,8 +33,8 @@ Constant OPTIONAL_NO_DARKNESS;
 !Constant OPTIONAL_SHIP_DIRECTIONS;
 !Constant OPTIONAL_ALLOW_WRITTEN_NUMBERS;
 !Constant OPTIONAL_GUESS_MISSING_NOUN;
-!Constant OPTIONAL_EXTENDED_METAVERBS;
-!Constant OPTIONAL_EXTENDED_VERBSET;
+Constant OPTIONAL_EXTENDED_METAVERBS;
+Constant OPTIONAL_EXTENDED_VERBSET;
 !Constant OPTIONAL_FLEXIBLE_INVENTORY;
 !Constant OPTIONAL_LANGUAGE_NUMBER;
 !Constant OPTIONAL_LIST_TOGETHER;
@@ -73,38 +73,10 @@ Include "puny.h";
 ! Uncomment to add PunyInform extensions
 !Include "ext_waittime.h";
 
-Global prologuequestion = 0;
-
-Verb 'yes'
-	* -> YesAnswer;
-
-Verb 'no'
-	* -> NoAnswer;
-
-[ YesAnswerSub;
-	if(prologuequestion == 0) {
-		prologuequestion = 1;
-		SetTime(1* 60 + 5, 5); ! Amazing, TRULY amazing, how the entire concept of time itself could be brought to life with just one simple equation of four digits, while
-							   ! 'Let there be light' is only four words.
-		move player to HotelEntrance;
-	} else {
-		"I'm glad you agree, O reader, though I'm not sure what you just agreed to.";
-	}
-];
-
-[ NoAnswerSub;
-	if(prologuequestion == 0) {
-		prologuequestion = 1;
-		deadflag = GS_DEAD;
-		"Ah, very well. I appreciate your time in this case, O reader. May your holidays be bright, and see you in the next life.";
-	} else {
-		"I'm sorry, O reader, and I hope that I did not offend. If you would like to stop reading, I will not keep you. You may leave at any time.";
-	}
-];
-
 Object Prologue "^PROLOGUE : Christmas Adam"
 	with
-		description "^^Eleanor was * such * a Scrooge. At least, that's what she told herself. ^^Now, why on God's magnificent Earth: that life-breathing marble of emerald green, 
+		description
+			"^^Eleanor was * such * a Scrooge. At least, that's what she told herself. ^^Now, why on God's magnificent Earth: that life-breathing marble of emerald green, 
 			suspended by a thin film of web in infinite pirouette, itself twirling endlessly beneath twinkling swathes of star-speckled indigo, a world that we all drink from, taste 
 			from, breathe from, an ever-expanding colony full of little worker ants scurrying to get that big fat crumb; all of them foaming at the mouth, sickened by the curses of 
 			love and longing, HOW then, I ask, would one of His many souls commit such a epithet, one not predicated on the spoken notion on another, but instead born from an 
@@ -147,7 +119,15 @@ Object Prologue "^PROLOGUE : Christmas Adam"
 			for an old woman like myself is not without her pride, however bruised and damaged it may be. So let us skip these trivialities, O reader, and take my hand: as we skip
 			forward to the cataylst of events so calamitous that I find myself awake in the wee hours of the morning, typing away at my keyboard with a feverish enthusiasm, in order
 			to present these events to you in such a manner that you understand what is truly at stake: not the fate of our Eleanor, nor the fate of myself, but the fate of the world:
-			all 5,234,431,732 blinking, shouting, crying, defecating, bleeding hearts that beat together in asynchronous harmony, and yes, even you, my friend. ^^Do you understand?";
+			all 5,234,431,732 blinking, shouting, crying, defecating, bleeding hearts that beat together in asynchronous harmony, and yes, even you, my friend. ^^It was then, as
+			the pendulum completed it's final arc beneath the clock that midnight struck, as our unwitting but lovable protagonist Eleanor arrived at the entrance of the Palmer House
+			Hilton, rain pouring down on her umbrella in a symphony of hushed murmurs, thousands of tiny voices from the heavens above coalescing into a steady pitter pattern
+			in her eardrums. In other words, O reader, she arrived.";
+			after [;
+            	Look:
+                	PlayerTo(RoomOne);
+                	rtrue;
+      		  ];
 
 Object HotelEntrance "Palmer House Entrance"
 	with
