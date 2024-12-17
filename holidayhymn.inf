@@ -258,5 +258,5 @@ Object Umbrella "umbrella"
 	print "^^I have commited to code this Ghostly little adventure, to echo the Ghost of an Idea, from an old, dear friend.^^";
 	print "^^It is my hope that this Ghost finds you in good spirits, and as it did before me: may it haunt your houses pleasantly.^^";
 	print "^^Your friendly servant, C. G. MOON^^";
-	move InventoryItemTest to player;
+	move Umbrella to player;
 ];
