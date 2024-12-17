@@ -74,7 +74,8 @@ Include "puny.h";
 !Include "ext_waittime.h";
 
 Verb 'kick'
-	* noun -> Kick;
+	* noun -> Kick
+	* -> Kick;
 
 [KickSub;
 	"Perhaps Eleanor was having * too * rough a Christmas this year, because it was at that moment in which Eleanor shouted
