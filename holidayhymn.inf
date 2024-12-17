@@ -73,7 +73,19 @@ Include "puny.h";
 ! Uncomment to add PunyInform extensions
 !Include "ext_waittime.h";
 
+Verb 'kick'
+	* noun -> Kick;
+
+[KickSub;
+	"Perhaps Eleanor was having * too * rough a Christmas this year, because it was at that moment in which Eleanor shouted
+	into the night, swinging her leg with the force of a hammer driving in an errant nail, showing that thin air in front
+	of her who's really in charge.";
+];
+
 Global openingcourtyard = 0;
+Global hurtleg = 0;
+Global playerhealth = 5;
+Global seenbench = 0;
 
 Object Prologue "^- PROLOGUE : Christmas Adam -"
 	with
@@ -134,15 +146,12 @@ Object Prologue "^- PROLOGUE : Christmas Adam -"
 Object HotelEntrance "Palmer House Courtyard"
 	with
 		initial "^^- STAVE ONE : ASHLEY'S GHOST -^^",
-		description "^^The towering facade of the Palmer House 
-		loomed over Eleanor in the downpour as she arrived in the courtyard.";
-
-Object -> Bench "bench"
-	with
-		name 'bench' 'ornate',
-		initial [;
+		description [;
 			if(openingcourtyard == 0) {
-				print "She scanned the courtyard with an anxious eye, taking
+			openingcourtyard = 1;
+			"^^The towering facade of the Palmer House 
+			loomed over Eleanor in the downpour as she arrived in the courtyard. 
+			^^She scanned the courtyard with an anxious eye, taking
 			note of each detail of her temporary home. What she was
 			looking for; be it a person watching her from afar, an
 			object out of place to indicate she's indeed once again
@@ -151,41 +160,69 @@ Object -> Bench "bench"
 			imminent demise; whatever that was which she looked for,
 			she found no such thing, as evidenced by the look of 
 			worry leaving her furrowed brows. Instead, she was met
-			with the mundane. ^^An ornate bench sits snug between two humming
-			lampposts, gently illuminated in a golden bath, the light
-			between them dancing between the droplets like tiny sparks.
-			The damp wood composing the bench gleams faintly in the rippling
-			pools beneath it, the wood itself now darkened to a deep,
-			illustrious brown by the heavy moisture. Ah, what a bench, O
-			reader! Stoic and timeless, that bench, with metal arches cast
-			in olive green for arm rests, and with a tasteful 'H' embossed
-			in its centre in honor of the recent transfer of ownership
-			to one Conrad Hilton, the Palmer House now joining a family
-			of 187 other hotels who share that same 'H', all of them
-			wet from the rain, sitting in various stages of vacancy
-			across the country.";
-			openingcourtyard = 1;
-			}
+			with the mundane."; } else {
+			"The towering facade of the Palmer House 
+			loomed over Eleanor in the downpour as she arrived in the courtyard."; }
+		];
+
+Object -> Bench "bench"
+	with
+		name 'bench' 'ornate',
+		initial [;
+			if(parent(player) == self) 
+			return;
+			else if(location == HotelEntrance && seenbench == 0) {
+				seenbench = 1;
+				"An ornate bench sits snug between two humming
+				lampposts, gently illuminated in a golden bath, the light
+				between them dancing between the droplets like tiny sparks.
+				The damp wood composing the bench gleams faintly in the rippling
+				pools beneath it, the wood itself now darkened to a deep,
+				illustrious brown by the heavy moisture. Ah, what a bench, O
+				reader! Stoic and timeless, that bench, with metal arches cast
+				in olive green for arm rests, and with a tasteful 'H' embossed
+				in its centre in honor of the recent transfer of ownership
+				to one Conrad Hilton, the Palmer House now joining a family
+				of 187 other hotels who share that same 'H', all of them
+				wet from the rain, sitting in various stages of vacancy
+				across the country."; }
+			else if(location == HotelEntrance && seenbench == 1)
+				"The same ornate bench from before sits dutifuly in its eternal spot, eagerly awaiting
+				the next warm body to support.";
+		],
+		description [;
+			if(parent(player) == self)
+			return;
+			else
+			"Text text.";
 			],
-		description "An ornate bench sits snug between two humming
-		lampposts, gently illuminated in a golden bath, the light
-		between them dancing between the droplets like tiny sparks.
-		The damp wood composing the bench gleams faintly in the rippling
-		pools beneath it, the wood itself now darkened to a deep,
-		illustrious brown by the heavy moisture. Ah, what a bench, O
-		reader! Stoic and timeless, that bench, with metal arches cast
-		in olive green for arm rests, and with a tasteful 'H' embossed
-		in its centre in honor of the recent transfer of ownership
-		to one Conrad Hilton, the Palmer House now joining a family
-		of 187 other hotels who share that same 'H', all of them
-		wet from the rain, sitting in various stages of vacancy
-		across the country.",
-		inside_description "Eleanor looked out into the rain,
-		lost in thought.",
+		inside_description "Eleanor looked out into the rain, lost in thought.",
 		before [;
 			Enter:
 				move player to Bench;
 				"She sat on the bench.";
+			Exit:
+				move player to HotelEntrance;
+				"She got up from the bench.";
+			Attack, Kick:
+			if(hurtleg == 0) {
+				hurtleg = 1;
+				playerhealth = playerhealth - 1;
+				"Eleanor, in a fit of inexplicable rage, attempted to kick the bench. If only you were there to hear the sound
+				her heel made against that metal, O reader, for I still hear the faint ringing in my ear to this very day. As
+				for Eleanor's foot, however, that is a far sadder story: for she had injured herself quite badly in the process. 
+				^^Eleanor shouted in agony, clutching her wounded toes and hopping around, nearly slipping and falling in the
+				splashing water beneath her boots. Though her intentions were quite nebulous to me, O reader, know that it was
+				an impressive sight indeed, both the motion of her pendulum like swing, and the power that which she exerted
+				onto the bench. Theorists speculate that the kick reached upwards of 500 newtons in force, and in all fairness,
+				she did move the bench, only by about an inch."; } 
+				else {
+					"Though the signal * did * reach her brain to give that bench a piece of her mind, as it stands the pain in
+					her leg was already too great, and she could not bare to complete her task of violence towards the
+					bench. As I am sure that Eleanor had good reasons, the bench must have had it coming. What a lucky day it
+					is then for the elongated seat that Eleanors' leg is too injured to unleash her fury, though rest assured
+					if she did kick the bench, it would have been a massacre.";
+				}
 		],
 	has static supporter enterable;
 

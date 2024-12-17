@@ -16,3 +16,14 @@ Gray (Bob)
 Sam (Tim) (DEATHLY ill)
 Beau (Belle)
 Emily (love interest)
+
+CODE GRAVEYARD (might be useful later)
+
+[PunchSub;
+	"With all of her might, Eleanor took a mighty swing through the air. As powerful a punch it was, O reader, it is with
+	much sadness and a heavy heart that I must tell you that not only did the punch not connect with anything, in fact,
+	there was nothing there to punch. I'm not really sure why she did that, but I hope it did something for her.";
+];
+
+Verb 'punch'
+	* noun -> Punch;
