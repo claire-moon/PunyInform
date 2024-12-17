@@ -151,7 +151,10 @@ Object HotelEntrance "Palmer House Courtyard"
 			if(openingcourtyard == 0) {
 			openingcourtyard = 1;
 			"^^The towering facade of the Palmer House 
-			loomed over Eleanor in the downpour as she arrived in the courtyard. 
+			loomed over Eleanor in the downpour as she arrived in the courtyard.
+			The entrance to the hotel glowed ahead, immediately to the north of her, and to the south: 
+			the sprawling metropolis, the winding  tendrils of its skyline stretching on and on, 
+			far beyond the curtains of rain, and out of sight.. 
 			^^She scanned the courtyard with an anxious eye, taking
 			note of each detail of her temporary home. What she was
 			looking for; be it a person watching her from afar, an
@@ -163,7 +166,10 @@ Object HotelEntrance "Palmer House Courtyard"
 			worry leaving her furrowed brows. Instead, she was met
 			with the mundane."; } else {
 			"The towering facade of the Palmer House 
-			loomed over Eleanor in the downpour as she arrived in the courtyard."; }
+			loomed over Eleanor in the downpour as she arrived in the courtyard 
+			The entrance to the hotel glowed ahead, immediately to the north of her, and to the south: 
+			the sprawling metropolis, the winding  tendrils of its skyline stretching on and on, 
+			far beyond the curtains of rain, and out of sight.."; }
 		];
 
 Object -> Bench "bench"
@@ -175,14 +181,13 @@ Object -> Bench "bench"
 			else if(seenbench == 0) {
 				seenbench = 1;
 				"An ornate bench sits snug between two humming
-				lampposts, gently illuminated in a golden bath, the light
-				between them dancing between the droplets like tiny sparks.
-				The damp wood composing the bench gleams faintly in the rippling
-				pools beneath it, the wood itself now darkened to a deep,
-				illustrious brown by the heavy moisture. Ah, what a bench, O
+				lampposts, the light between them dancing across the slick surface 
+				of the bench, illuminating each droplet like a tiny spark.
+				The wood of the bench itself has darkened to a deep,
+				illustrious brown from the heavy moisture. ^^Ah, what a bench, O
 				reader! Stoic and timeless, that bench, with metal arches cast
 				in olive green for arm rests, and with a tasteful 'H' embossed
-				in its centre in honor of the recent transfer of ownership
+				across each arm rest in honor of the recent transfer of ownership
 				to one Conrad Hilton, the Palmer House now joining a family
 				of 187 other hotels who share that same 'H', all of them
 				wet from the rain, sitting in various stages of vacancy
@@ -195,9 +200,24 @@ Object -> Bench "bench"
 			if(parent(player) == self)
 			return;
 			else
-			"Text text.";
+			"The ornate nature of the bench seemed to intrigue Eleanor, as she leaned in
+			and marveled at the delicate craftsmanship. Make no mistake, my friend, this
+			was no mere bench, as Eleanor would soon find out herself. Imagine if you will:
+			the faint, sinuous grain of dampened teak, its surface undulating in the faintest
+			of ridges, as though the very essence of the tree that birthed this fine piece
+			of handiwork still murmured beneath its glossy sheen. The metal rests curved
+			ever so sensually, with the faintest of scratches and wear: all pf them witness to
+			years upon years of leaning elbows and resting handbgs. These curved edges,
+			like the sweep of a falcon's wings, gather rainwater in tiny rivulets, all of 
+			it trickling down and pooling into little recesses below, the lamplight dancing
+			across each ripple. Good Heavens, and do you see that 'H', O reader? Look even closer,
+			and be amazed: for the edges are not merely perfectly smooth, but beveled with
+			precision. Even Eleanor could not help but trace her little finger across the ridges.
+			Already there is a faint patina blooming at each crevice of the letter, mingling the
+			metal's gentle olive tones with a warm bronze, a mark of time's gentle hand if I've
+			ever seen one.";
 			],
-		inside_description "Eleanor looked out into the rain, lost in thought.",
+		inside_description "Eleanor craned her neck, lost in thought.",
 		before [;
 			Enter:
 				move player to Bench;
@@ -227,9 +247,9 @@ Object -> Bench "bench"
 		],
 	has static supporter enterable;
 
-Object InventoryItemTest "inventory item"
+Object Umbrella "umbrella"
 	with
-		name 'item',
+		name 'umbrella',
 		description "A mysterious item in Eleanors purse. Who knows what that could be?";
 
 
@@ -238,4 +258,5 @@ Object InventoryItemTest "inventory item"
 	print "^^I have commited to code this Ghostly little adventure, to echo the Ghost of an Idea, from an old, dear friend.^^";
 	print "^^It is my hope that this Ghost finds you in good spirits, and as it did before me: may it haunt your houses pleasantly.^^";
 	print "^^Your friendly servant, C. G. MOON^^";
+	move InventoryItemTest to player;
 ];
