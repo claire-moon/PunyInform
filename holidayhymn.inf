@@ -73,12 +73,7 @@ Include "puny.h";
 ! Uncomment to add PunyInform extensions
 !Include "ext_waittime.h";
 
-Extend 'sit' replace
-	* 'on' noun -> SitOn;
-
-[ SitOnSub;
-	"Eleanor sat down where she stood.";
-];
+Global openingcourtyard = 0;
 
 Object Prologue "^- PROLOGUE : Christmas Adam -"
 	with
@@ -136,7 +131,7 @@ Object Prologue "^- PROLOGUE : Christmas Adam -"
                 	rtrue;
       		  ];
 
-Object HotelEntrance "Palmer House Entrance"
+Object HotelEntrance "Palmer House Courtyard"
 	with
 		initial "^^- STAVE ONE : ASHLEY'S GHOST -^^",
 		description "^^The towering facade of the Palmer House 
@@ -144,29 +139,34 @@ Object HotelEntrance "Palmer House Entrance"
 
 Object -> Bench "bench"
 	with
-		name 'bench',
-		initial "She scanned the courtyard with an anxious eye, taking
-		note of each detail of her temporary home. What she was
-		looking for; be it a person watching her from afar, an
-		object out of place to indicate she's indeed once again
-		dreaming of this moment rather than living it, or perhaps
-		some kind of augury acting as a carrier pigeon for her
-		imminent demise; whatever that was which she looked for,
-		she found no such thing, as evidenced by the look of 
-		worry leaving her furrowed brows. Instead, she was met
-		with the mundane. ^^An ornate bench sits snug between two humming
-		lampposts, gently illuminated in a golden bath, the light
-		between them dancing between the droplets like tiny sparks.
-		The damp wood composing the bench gleams faintly in the rippling
-		pools beneath it, the wood itself now darkened to a deep,
-		illustrious brown by the heavy moisture. Ah, what a bench, O
-		reader! Stoic and timeless, that bench, with metal arches cast
-		in olive green for arm rests, and with a tasteful 'H' embossed
-		in its centre in honor of the recent transfer of ownership
-		to one Conrad Hilton, the Palmer House now joining a family
-		of 187 other hotels who share that same 'H', all of them
-		wet from the rain, sitting in various stages of vacancy
-		across the country.",
+		name 'bench' 'ornate',
+		initial [;
+			if(openingcourtyard == 0) {
+				print "She scanned the courtyard with an anxious eye, taking
+			note of each detail of her temporary home. What she was
+			looking for; be it a person watching her from afar, an
+			object out of place to indicate she's indeed once again
+			dreaming of this moment rather than living it, or perhaps
+			some kind of augury acting as a carrier pigeon for her
+			imminent demise; whatever that was which she looked for,
+			she found no such thing, as evidenced by the look of 
+			worry leaving her furrowed brows. Instead, she was met
+			with the mundane. ^^An ornate bench sits snug between two humming
+			lampposts, gently illuminated in a golden bath, the light
+			between them dancing between the droplets like tiny sparks.
+			The damp wood composing the bench gleams faintly in the rippling
+			pools beneath it, the wood itself now darkened to a deep,
+			illustrious brown by the heavy moisture. Ah, what a bench, O
+			reader! Stoic and timeless, that bench, with metal arches cast
+			in olive green for arm rests, and with a tasteful 'H' embossed
+			in its centre in honor of the recent transfer of ownership
+			to one Conrad Hilton, the Palmer House now joining a family
+			of 187 other hotels who share that same 'H', all of them
+			wet from the rain, sitting in various stages of vacancy
+			across the country.";
+			openingcourtyard = 1;
+			}
+			],
 		description "An ornate bench sits snug between two humming
 		lampposts, gently illuminated in a golden bath, the light
 		between them dancing between the droplets like tiny sparks.
@@ -184,15 +184,10 @@ Object -> Bench "bench"
 		lost in thought.",
 		before [;
 			Enter:
-				"She sat on the bench.";
-			SitOn:
-				"She sat on the bench.";
-		],
-		after [;
-			SitOn:
+				move player to Bench;
 				"She sat on the bench.";
 		],
-	has supporter enterable;
+	has static supporter enterable;
 
 Object InventoryItemTest "inventory item"
 	with
