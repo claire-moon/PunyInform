@@ -73,6 +73,10 @@ Include "puny.h";
 ! Uncomment to add PunyInform extensions
 !Include "ext_waittime.h";
 
+[ SitSub;
+	"Eleanor sat down where she stood.";
+];
+
 Object Prologue "^- PROLOGUE : Christmas Adam -"
 	with
 		description
@@ -131,14 +135,25 @@ Object Prologue "^- PROLOGUE : Christmas Adam -"
 
 Object HotelEntrance "Palmer House Entrance"
 	with
-		initial "^^- STAVE ONE : ASHLEY'S GHOST -" "^^I can't believe that this works!",
-		description "^^If someone were to put test text here, that someone would be me.";
+		initial "^^- STAVE ONE : ASHLEY'S GHOST -^^",
+		description "^^The towering facade of the Palmer House loomed over Eleanor in the downpour as she arrived in the courtyard.";
 
-Object -> Box "box"
+Object -> Bench "bench"
 	with
-		name 'box',
-		inside_description "How the fuck did you get in here?",
-	has container open openable enterable;
+		name 'bench',
+		description "An ornate bench sits to her side.",
+		inside_description "She sat down on the bench to take a break.",
+		after [;
+			Sit:
+				"She sat on the bench.";
+		],
+	has supporter enterable;
+
+Object InventoryItemTest "inventory item"
+	with
+		name 'item',
+		description "A mysterious item in Eleanors purse. Who knows what that could be?";
+
 
 [Initialise;
 	print "- PREFACE -^";
