@@ -171,7 +171,7 @@ Object -> Bench "bench"
 		initial [;
 			if(parent(player) == self) 
 			return;
-			else if(location == HotelEntrance && seenbench == 0) {
+			else if(seenbench == 0) {
 				seenbench = 1;
 				"An ornate bench sits snug between two humming
 				lampposts, gently illuminated in a golden bath, the light
@@ -186,7 +186,7 @@ Object -> Bench "bench"
 				of 187 other hotels who share that same 'H', all of them
 				wet from the rain, sitting in various stages of vacancy
 				across the country."; }
-			else if(location == HotelEntrance && seenbench == 1)
+			else if(seenbench == 1)
 				"The same ornate bench from before sits dutifuly in its eternal spot, eagerly awaiting
 				the next warm body to support.";
 		],
