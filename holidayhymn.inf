@@ -217,7 +217,10 @@ Object -> Bench "bench"
 			metal's gentle olive tones with a warm bronze, a mark of time's gentle hand if I've
 			ever seen one.";
 			],
-		inside_description "Eleanor craned her neck, lost in thought.",
+		inside_description "Eleanor craned her neck, lost in thought. ~Is he already here? Waiting for me?~, she thought,
+		a tell-tale current of warm blood rushing down her body. She turned her eye to the hotel, its multi-storied facade towering
+		into the clouds and disappearing into the fog above, a patchwork of glowing windows winking in the reflection of her
+		glasses.",
 		before [;
 			Enter:
 				move player to Bench;
@@ -251,6 +254,11 @@ Object Umbrella "umbrella"
 	with
 		name 'umbrella',
 		description "A mysterious item in Eleanors purse. Who knows what that could be?";
+
+Object Glasses "glasses"
+	with
+		name 'glasses', 'spectacles'
+		description "Eleanor's trusty glasses, for without them: she cannot see."
 
 
 [Initialise;
