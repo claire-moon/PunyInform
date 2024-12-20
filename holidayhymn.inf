@@ -255,10 +255,10 @@ Object Umbrella "umbrella"
 		name 'umbrella',
 		description "A mysterious item in Eleanors purse. Who knows what that could be?";
 
-Object Glasses "glasses"
-	with
-		name 'glasses', 'spectacles'
-		description "Eleanor's trusty glasses, for without them: she cannot see."
+!Object Glasses "glasses"
+!	with
+!		name 'glasses', 'spectacles',
+!		description "Eleanor's trusty glasses, for without them: she cannot see."
 
 
 [Initialise;
