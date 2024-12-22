@@ -284,4 +284,5 @@ Object Glasses "glasses"
 	print "^^It is my hope that this Ghost finds you in good spirits, and as it did before me: may it haunt your houses pleasantly.^^";
 	print "^^Your friendly servant, C. G. MOON^^";
 	move Umbrella to player;
+	move Glasses to player;
 ];
