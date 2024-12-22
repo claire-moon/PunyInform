@@ -153,7 +153,7 @@ Object HotelEntrance "Palmer House Courtyard"
 			"^^The towering facade of the Palmer House 
 			loomed over Eleanor in the downpour as she arrived in the courtyard.
 			The entrance to the hotel glowed ahead, immediately to the north of her, and to the south: 
-			the sprawling metropolis, the winding  tendrils of its skyline stretching on and on, 
+			the sprawling metropolis, the winding tendrils of its skyline stretching on and on, 
 			far beyond the curtains of rain, and out of sight.. 
 			^^She scanned the courtyard with an anxious eye, taking
 			note of each detail of her temporary home. What she was
@@ -168,9 +168,10 @@ Object HotelEntrance "Palmer House Courtyard"
 			"The towering facade of the Palmer House 
 			loomed over Eleanor in the downpour as she arrived in the courtyard 
 			The entrance to the hotel glowed ahead, immediately to the north of her, and to the south: 
-			the sprawling metropolis, the winding  tendrils of its skyline stretching on and on, 
+			the sprawling metropolis, the winding tendrils of its skyline stretching on and on, 
 			far beyond the curtains of rain, and out of sight.."; }
 		];
+		s_to Metropolis,
 
 Object -> Bench "bench"
 	with
@@ -250,15 +251,31 @@ Object -> Bench "bench"
 		],
 	has static supporter enterable;
 
+Object Metropolis "Metropolis"
+	with
+		name 'metropolis' 'city' 'buildings'
+		description "My, oh my! O reader! For our Eleanor was never the predictable sort, though she may spend a considerable amount of her own spare time convincing you
+		otherwise... I implore you, dear friend, to understand this about our protagonist: Eleanor is a creature of contradictions, tethered to routines so nebulous that any
+		attempt to merely interpret such a neurotic system, would render any programmer with a two week extended vacation to the luxury mental health facility of their choice:
+		complete with padded walls and complimentary spiced chai tea on tap. ^^Know this, O reader, that Eleanor, dear sweet Eleanor looked upon the blazing edifice of that hotel
+		wall, and said aloud into the weeping sky above: ~Never mind.~. It was then that her path diverged, creating such an extra-ordinary shape: a dotted line looping and spiraling
+		like the map borne from a cartographer drunk on madness, and perhaps another motive, one you can trace down the motorway, across each scenic byway, all the way down 
+		to His beating heart. ^^Eleanor followed no script. Her course was guided by something ineffable, magnetic -- a pull so intoxicating. ^^The city, responded in kind: its streets
+		humming with life, blinking little lights, all flickering like secret messages. ~I love you, Eleanor.~, the city whispered. ",
+
+Object HotelArcade "Palmer House Entrance"
+	with
+		name 'entrance' 'hotel'
+
 Object Umbrella "umbrella"
 	with
 		name 'umbrella',
 		description "A mysterious item in Eleanors purse. Who knows what that could be?";
 
-!Object Glasses "glasses"
-!	with
-!		name 'glasses', 'spectacles',
-!		description "Eleanor's trusty glasses, for without them: she cannot see."
+Object Glasses "glasses"
+	with
+		name 'glasses' 'spectacles',
+		description "Eleanor's trusty glasses, for without them: she cannot see."
 
 
 [Initialise;
