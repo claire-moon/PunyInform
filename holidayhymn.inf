@@ -149,7 +149,7 @@ Object HotelEntrance "Palmer House Courtyard"
 	with
 		initial "^^- STAVE ONE : ASHLEY'S GHOST -^^",
 		description [;
-			if(openingcourtyard == 0) {
+			if(openingcourtyard == 0 && wearingglasses == 1) {
 			openingcourtyard = 1;
 			"^^The towering facade of the Palmer House 
 			loomed over Eleanor in the downpour as she arrived in the courtyard.
@@ -165,12 +165,20 @@ Object HotelEntrance "Palmer House Courtyard"
 			imminent demise; whatever that was which she looked for,
 			she found no such thing, as evidenced by the look of 
 			worry leaving her furrowed brows. Instead, she was met
-			with the mundane."; } else {
+			with the mundane."; } else if(openingcourtyard == 1 && wearingglasses == 1) {
 			"The towering facade of the Palmer House 
 			loomed over Eleanor in the downpour as she arrived in the courtyard 
 			The entrance to the hotel glowed ahead, immediately to the north of her, and to the south: 
 			the sprawling metropolis, the winding tendrils of its skyline stretching on and on, 
 			far beyond the curtains of rain, and out of sight.."; }
+			else if (openingcourtyard == 1 && wearingglasses == 0) {
+			"In the distance and to the north,: a massive grayish blur with scattered 
+			twinkly rectangles -- probably windows? As much as Eleanor tried to squint her little eyes,
+			the nebulous shape never quite took form; though by process of elimination she determined
+			that it was more than likely to be the blurred form of the Palmer House. To the south: a
+			cavernous darkness, identifiable only by the distant chorus of its honking motorcade. The hulking
+			shroud of Chicago gently roared behind her.";
+			}
 		],
 		s_to Metropolis;
 
@@ -180,7 +188,7 @@ Object -> Bench "bench"
 		initial [;
 			if(parent(player) == self) 
 			return;
-			else if(seenbench == 0) {
+			else if(seenbench == 0 && wearingglasses == 1) {
 				seenbench = 1;
 				"An ornate bench sits snug between two humming
 				lampposts, the light between them dancing across the slick surface 
@@ -194,14 +202,18 @@ Object -> Bench "bench"
 				of 187 other hotels who share that same 'H', all of them
 				wet from the rain, sitting in various stages of vacancy
 				across the country."; }
-			else if(seenbench == 1)
+			else if(seenbench == 1 && wearingglasses == 1)
 				"The same ornate bench from before sits dutifuly in its eternal spot, eagerly awaiting
 				the next warm body to support.";
+			else if(seenbench == 1 && wearingglasses == 0)
+				"A soupy blur of shadows sits off to the side, presumably the bench -- though Eleanor could not
+				be completely sure.";
 		],
 		description [;
 			if(parent(player) == self)
 			return;
 			else
+			if (wearingglasses == 1)
 			"The ornate nature of the bench seemed to intrigue Eleanor, as she leaned in
 			and marveled at the delicate craftsmanship. Make no mistake, my friend, this
 			was no mere bench, as Eleanor would soon find out herself. Imagine if you will:
