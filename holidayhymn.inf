@@ -34,7 +34,7 @@ Constant OPTIONAL_NO_DARKNESS;
 !Constant OPTIONAL_ALLOW_WRITTEN_NUMBERS;
 !Constant OPTIONAL_GUESS_MISSING_NOUN;
 !dConstant OPTIONAL_EXTENDED_METAVERBS;
-Constant OPTIONAL_EXTENDED_VERBSET;
+!Constant OPTIONAL_EXTENDED_VERBSET;
 !Constant OPTIONAL_FLEXIBLE_INVENTORY;
 !Constant OPTIONAL_LANGUAGE_NUMBER;
 !Constant OPTIONAL_LIST_TOGETHER;
@@ -77,10 +77,14 @@ Verb 'kick'
 	* noun -> Kick
 	* -> Kick;
 
-Extend 'think'
+Verb 'think'
 	* noun -> Think
 	* 'about' noun -> Think
 	* -> Think;
+
+[ThinkSub;
+	"Eleanor thought about nothing.";
+];
 
 [KickSub;
 	"Perhaps Eleanor was having * too * rough a Christmas this year, because it was at that moment in which Eleanor shouted
@@ -93,6 +97,8 @@ Global hurtleg = 0;
 Global playerhealth = 5;
 Global seenbench = 0;
 Global wearingglasses = 1;
+Global thinkbench = 0;
+Global glassesstart = 0;
 
 Object Prologue "^- PROLOGUE : Christmas Adam -"
 	with
@@ -185,7 +191,8 @@ Object HotelEntrance "Palmer House Courtyard"
 			shroud of Chicago gently roared behind her.";
 			}
 		],
-		s_to Metropolis;
+		s_to Metropolis,
+		n_to HotelArcade;
 
 Object -> Bench "bench"
 	with
@@ -241,6 +248,42 @@ Object -> Bench "bench"
 		into the clouds and disappearing into the fog above, a patchwork of glowing windows winking in the reflection of her
 		glasses.",
 		before [;
+			Think:
+				thinkbench = 1;
+				"Eleanor's tired gaze fixated on the bench, as her lips involuntarily pressed together tightly: forming
+				a thin scar across her face. At first glance, the bench * seems * harmless -- perhaps even inviting. Think
+				about it, O reader: the smooth contours of its wooden seat, the sensual curvature of its metallic armrests;
+				inviting anyone with half-a-heart to lay their weary palm upon its metal, and then: the ~H~. An embossment so
+				flawless it borderlines on the pretentious. All together, a portrait of benign elegance, and nothing more.
+				^^But linger longer, O reader, as did our poor Eleanor, and you might find a peculiar sensation in your
+				chest: boiling, hot water, ready to sizzle over the edge of the teapot.
+				^^What was it about that damn bench? Its quiet smugness, perhaps? The way it seemed to beckon
+				her with open arms, as if it knew how lonely she truly was deep down. Or maybe its the way the
+				light dances across its rain-slicked surface, a polar opposite visage in Eleanors mind: herself shivering
+				in the cold rain while the self-satisfied bench reclined in timeless stoicism, a snapshot ever lasting, unmoving,
+				unchanging, and uncaring. ^^~What gives you the right to be so comfortable?~, she thought, her teeth now
+				gritting. The more she looked at it, the higher her temperature rose, herself now glowing in infared.
+				As the rain drummed against her umbrella, a waterfall of envies and jealousies filled the basin of her
+				mind: Its impenetrable veneer, unbothered by the elements. Its unyielding permanence, standing there like it
+				owned that corner of this rain-soaked world. She clenched her fist, and believe me, O reader, that when I say that
+				turn of phrase: 'clenched her fist', know that it is no mere exaggeration. Not an ounce of hyperbole you will find
+				between those words. For when Eleanor 'clenches' those claws of hers, she would find herself wearing
+				gloves the following day to hide the scars -- hiding from whom, no one could be certain, whether it be from others,
+				or herself. Yet another surge of indignation warmed her in the falling rain. ^^~God...~, she silently exclaimed,.
+				unheard by anything above, her frail voice no match for the howling rain. Yes, * God * indeed, O reader! Imagine the
+				* audacity * of such a bench, to just sit there: pristine and eternal, as if it hadn't seen countless shuffling feet
+				trodden down by the same cruel rain. ^^Her mind raced, and she began to feel sick. It wasn't fair. None of it was fair!
+				I implore you, O reader... Dare to speculate upon it: Just how many lonely souls had sought refuge on that very bench?
+				How many burdens had it borne, only to emerge completely unmarred, untouched, and most biting of all: unharmed?
+				Eleanor's breath quickened pace. ^^* How *. The word echoed across her mind. How, how, how, h o w. And yes, how indeed:
+				How could such a soul be so inviting, and not even have a soul? ^^A tide of rage swept her, an irrestiable one at that.
+				That bench was no mere bench, it was an affront: an act of grafitti with the sole purpose of representing everything
+				that Eleanor didn't have, couldn't have, or more accurately: could never have.
+				A radiant yet unreachable figure on a pedestal. At the base of this pedestal, an engraving shimmers in the spotlight
+				in elegant, san-serif lettering: ~Fortuna's Favorite~. Around her feet lay an opulent boquet of roses, lilies, and violets;
+				together a fluorescent neon behind the heavy rainfall, bands of ruby, silver, and amethyst glistening in the wet light.
+				^^By then, it was far too late. Eleanor, by her own accord, had lost. The thought had already formed in poor Eleanors mind:
+				^^~Kick that son of a bitch.~";
 			Enter:
 				move player to Bench;
 				"She sat on the bench.";
@@ -289,7 +332,14 @@ Object HotelArcade "Palmer House Entrance"
 Object Umbrella "umbrella"
 	with
 		name 'umbrella',
-		description "A mysterious item in Eleanors purse. Who knows what that could be?";
+		description "Eleanor's umbrella. Simple, yet reliable. Its canopy is made of a durable black nylon, stretched
+		taut across a lightweight metal frame. The shaft: slender and unobtrusive, ending in a candy cane shaped plastic
+		handle -- designed for comfortable grip, and not for consumption  -- despite what the shape would have you believe.
+		^^When extended, the umbrella forms a protective arc from the rain: a span of approximately 36 inches (91 cm) unfolded,
+		with a diameter of a whopping 72 inches (183 cm) at its widest point. At the heart of the umbrella is an aluminum ribcage:
+		a flower of blooming metal, each petal tapering into thin, curved edges like the stretched membrane of the wings of a bat
+		-- delicate, yet strong. ^^All in all: a functional, utilitarian object, and a handy one at that. A useful tool against
+		this cold, wet world.";
 
 Object Glasses "pair of glasses"
 	with
@@ -297,10 +347,16 @@ Object Glasses "pair of glasses"
 		description "Eleanor's trusty glasses, for without them: she cannot see.",
 		after [;
 			Wear: 
+			if(glassesstart == 0) {
+				glassesstart = 1;
+				rtrue;
+			} else {
 				wearingglasses = 1;
 				"As she sat her trusty frames at the edge of her button nose, the foggy world in front of her crystailizes
 			into plain view. All of the muddy shapes from before now comfortably solid, and rigid with structure. No longer
 			blind as a bat, the path before her stretched on: a tangible, maleable world. A cold world. A loveless world.";
+			};
+				
 			Disrobe: 
 				wearingglasses = 0;
 				"As she carefully removed the frames and tucked them away into her coat pocket, a new world materalized before Eleanor:
