@@ -33,7 +33,7 @@ Constant OPTIONAL_NO_DARKNESS;
 !Constant OPTIONAL_SHIP_DIRECTIONS;
 !Constant OPTIONAL_ALLOW_WRITTEN_NUMBERS;
 !Constant OPTIONAL_GUESS_MISSING_NOUN;
-Constant OPTIONAL_EXTENDED_METAVERBS;
+!dConstant OPTIONAL_EXTENDED_METAVERBS;
 Constant OPTIONAL_EXTENDED_VERBSET;
 !Constant OPTIONAL_FLEXIBLE_INVENTORY;
 !Constant OPTIONAL_LANGUAGE_NUMBER;
@@ -76,6 +76,11 @@ Include "puny.h";
 Verb 'kick'
 	* noun -> Kick
 	* -> Kick;
+
+Extend 'think'
+	* noun -> Think
+	* 'about' noun -> Think
+	* -> Think;
 
 [KickSub;
 	"Perhaps Eleanor was having * too * rough a Christmas this year, because it was at that moment in which Eleanor shouted
@@ -264,7 +269,7 @@ Object -> Bench "bench"
 		],
 	has static supporter enterable;
 
-Object Metropolis "Metropolis"
+Object Metropolis "^Metropolis"
 	with
 		name 'metropolis' 'city' 'buildings',
 		initial "My, oh my! O reader! Forgive my exclamation, for our Eleanor was never the predictable sort -- though she may spend a considerable amount of her own spare time convincing you
@@ -274,7 +279,7 @@ Object Metropolis "Metropolis"
 		wall, and said aloud into the weeping sky above: ~Never mind.~. It was then that her path diverged, creating such an extra-ordinary shape: a dotted line looping and spiraling
 		like the map borne from a cartographer drunk on madness, and perhaps another motive, one you can trace down the motorway, across each scenic byway, all the way down 
 		to His beating heart. ^^Eleanor followed no script. Her course was guided by something ineffable, magnetic -- a pull so intoxicating. ^^The city, responded in kind: its streets
-		humming with life, blinking little lights, all flickering like secret messages in the wind. ~I love you, Eleanor.~, the city whispered. ";
+		humming with life, blinking little lights, all flickering like secret messages in the wind. ^^~I love you, Eleanor.~, the city whispered. ";
 
 Object HotelArcade "Palmer House Entrance"
 	with
@@ -298,7 +303,7 @@ Object Glasses "pair of glasses"
 			blind as a bat, the path before her stretched on: a tangible, maleable world. A cold world. A loveless world.";
 			Disrobe: 
 				wearingglasses = 0;
-				"As she carefully removed the frames and tucked them away into her coat pocket, a new world materalized before Eleanor,
+				"As she carefully removed the frames and tucked them away into her coat pocket, a new world materalized before Eleanor:
 				a scary world, the impressionist painting of a blob, a careless, soulless blob with its little engines purring
 				away in the far distance. To put this plainly, O reader, our dear Eleanor was as blind as blind could be
 				without these glasses, and now a world she once knew -- not by a significant amount mind you, but a world she
